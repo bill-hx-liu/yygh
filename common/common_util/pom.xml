@@ -9,12 +9,12 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>common-util</artifactId>
-    <version>1.0</version>
+    <artifactId>common_util</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
 
     <packaging>jar</packaging>
-    <name>common-util</name>
-    <description>common-util</description>
+    <name>common_util</name>
+    <description>common_util</description>
 
     <dependencies>
         <dependency>
