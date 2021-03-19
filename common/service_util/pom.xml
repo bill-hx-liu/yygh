@@ -16,11 +16,11 @@
     <description>service_util</description>
 
     <dependencies>
-<!--        <dependency>-->
-<!--            <groupId>com.atguigu.yygh</groupId>-->
-<!--            <artifactId>common-util</artifactId>-->
-<!--            <version>1.0</version>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>com.atguigu</groupId>
+            <artifactId>common_util</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
 
         <!-- redis -->
         <dependency>

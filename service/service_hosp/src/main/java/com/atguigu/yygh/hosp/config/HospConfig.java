@@ -1,14 +1,18 @@
 package com.atguigu.yygh.hosp.config;
 
+import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-/**
- * @author:lhx
- * @date 2021/3/15 16:32
- * @function:
- */
 @Configuration
-@MapperScan("package com.atguigu.yygh.hosp.mapper")
+@MapperScan("com.atguigu.yygh.hosp.mapper")
 public class HospConfig {
+    /**
+     * 分页插件
+     */
+    @Bean
+    public PaginationInterceptor paginationInterceptor() {
+        return new PaginationInterceptor();
+    }
 }
