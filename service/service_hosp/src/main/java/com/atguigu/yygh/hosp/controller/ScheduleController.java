@@ -37,5 +37,6 @@ public class ScheduleController {
                                      @PathVariable String workDate) {
         List<Schedule> list = scheduleService.getDetailSchedule(hoscode,depcode,workDate);
         return Result.ok(list);
+        
     }
 }
