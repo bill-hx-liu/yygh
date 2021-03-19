@@ -7,6 +7,7 @@ import com.atguigu.yygh.hosp.service.HospitalSetService;
 import com.atguigu.yygh.model.hosp.HospitalSet;
 import com.atguigu.yygh.vo.hosp.HospitalSetQueryVo;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -17,20 +18,17 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Random;
 
-/**
- * @author:lhx
- * @date 2021/3/15 16:23
- * @function:
- */
 @Api(tags = "医院设置管理")
 @RestController
 @RequestMapping("/admin/hosp/hospitalSet")
-
+@CrossOrigin
 public class HospitalSetController {
 
     //注入service
     @Autowired
     private HospitalSetService hospitalSetService;
+
+    // http://localhost:8201/admin/hosp/hospitalSet/findAll
 
     //1 查询医院设置表所有信息
     @ApiOperation(value = "获取所有医院设置")
@@ -55,7 +53,6 @@ public class HospitalSetController {
 
     //3 条件查询带分页
     @PostMapping("findPageHospSet/{current}/{limit}")
-    //@RequestBody(required = false)使用json传递数据,可以为空
     public Result findPageHospSet(@PathVariable long current,
                                   @PathVariable long limit,
                                   @RequestBody(required = false) HospitalSetQueryVo hospitalSetQueryVo) {
@@ -71,24 +68,16 @@ public class HospitalSetController {
         if(!StringUtils.isEmpty(hoscode)) {
             wrapper.eq("hoscode",hospitalSetQueryVo.getHoscode());
         }
+
         //调用方法实现分页查询
-        Page<HospitalSet> pageHospitalSet = hospitalSetService.page(page, wrapper);
+        IPage<HospitalSet> pageHospitalSet = hospitalSetService.page(page, wrapper);
+
         //返回结果
         return Result.ok(pageHospitalSet);
     }
-    /**
-     * {
-     *   "apiUrl": "http:localhost:9999",
-     *   "contactsName": "张三",
-     *   "contactsPhone": "1111111",
-     *   "hoscode": "111",
-     *   "hosname": "北京大学医学院",
-     *   "param": {},
-     * }
-     * */
+
     //4 添加医院设置
     @PostMapping("saveHospitalSet")
-    //@RequestBody必须要有，所以不能为空
     public Result saveHospitalSet(@RequestBody HospitalSet hospitalSet) {
         //设置状态 1 使用 0 不能使用
         hospitalSet.setStatus(1);
@@ -104,13 +93,13 @@ public class HospitalSetController {
         }
     }
 
-//    //5 根据id获取医院设置
+    //5 根据id获取医院设置
     @GetMapping("getHospSet/{id}")
     public Result getHospSet(@PathVariable Long id) {
-//        //模拟异常
 //        try {
-//            int a = 5 / 0;
-//        }catch (Exception e){
+//            //模拟异常
+//            int a = 1/0;
+//        }catch (Exception e) {
 //            throw new YyghException("失败",201);
 //        }
 
@@ -118,8 +107,7 @@ public class HospitalSetController {
         return Result.ok(hospitalSet);
     }
 
-
-//    //6 修改医院设置
+    //6 修改医院设置
     @PostMapping("updateHospitalSet")
     public Result updateHospitalSet(@RequestBody HospitalSet hospitalSet) {
         boolean flag = hospitalSetService.updateById(hospitalSet);
@@ -159,5 +147,4 @@ public class HospitalSetController {
         //TODO 发送短信
         return Result.ok();
     }
-
 }
