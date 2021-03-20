@@ -12,7 +12,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/admin/hosp/schedule")
-@CrossOrigin
+//@CrossOrigin
 public class ScheduleController {
 
     @Autowired
@@ -37,6 +37,6 @@ public class ScheduleController {
                                      @PathVariable String workDate) {
         List<Schedule> list = scheduleService.getDetailSchedule(hoscode,depcode,workDate);
         return Result.ok(list);
-        
+
     }
 }
